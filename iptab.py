@@ -9,17 +9,14 @@ class TableList(npyscreen.MultiLineAction):
 
     def actionHighlighted(self, act_on_this, key_press):
         selected_table = self.values[self.cursor_line]
-        if   selected_table == "FILTER" :  self.parent.parentApp.setNextForm("FILTER")
-        elif selected_table == "NAT"    :  self.parent.parentApp.setNextForm("NAT")
-        elif selected_table == "MANGLE" :  self.parent.parentApp.setNextForm("MANGLE")
-        elif selected_table == "RAW"    :  self.parent.parentApp.setNextForm("RAW")
-        elif selected_table == "SELINUX":  self.parent.parentApp.setNextForm("SELINUX")
-        else                            :  self.parent.parentApp.setNextForm(None)
+        if   selected_table == "FILTER" :  self.parent.parentApp.switchForm("FILTER")
+        elif selected_table == "NAT"    :  self.parent.parentApp.switchForm("NAT")
+        elif selected_table == "MANGLE" :  self.parent.parentApp.switchForm("MANGLE")
+        elif selected_table == "RAW"    :  self.parent.parentApp.switchForm("RAW")
+        elif selected_table == "SELINUX":  self.parent.parentApp.switchForm("SELINUX")
+        else                            :  self.parent.parentApp.switchForm(None)
  
 class table_Select_Form(npyscreen.Form):
-#    def afterEditing(self):
-#        self.parentApp.setNextForm(None)
-
     def create(self):
         self.Table_Choice = self.add(TableList, max_height = 6, name = "Select a table", scroll_exit = True)
 
@@ -27,22 +24,37 @@ class table_Select_Form(npyscreen.Form):
 #################################################
 ## BEGIN CHAIN SELECT FORM
 class Filter_Table(npyscreen.Form):
+    def afterEditing(self):
+        self.parentApp.setNextForm("MAIN")
+
     def create(self):
         self.MSG = self.add(npyscreen.TitleText, name = "FILTER")
 
 class Nat_Table(npyscreen.Form):
+    def afterEditing(self):
+        self.parentApp.setNextForm("MAIN")
+ 
     def create(self):
         self.MSG = self.add(npyscreen.TitleText, name = "NAT")
 
 class Mangle_Table(npyscreen.Form):
+    def afterEditing(self):
+        self.parentApp.setNextForm("MAIN")
+ 
     def create(self):
         self.MSG = self.add(npyscreen.TitleText, name = "MANGLE")
 
 class Raw_Table(npyscreen.Form):
+    def afterEditing(self):
+        self.parentApp.setNextForm("MAIN")
+ 
     def create(self):
         self.MSG = self.add(npyscreen.TitleText, name = "RAW")
 
 class Selinux_Table(npyscreen.Form):
+    def afterEditing(self):
+        self.parentApp.setNextForm("MAIN")
+ 
     def create(self):
         self.MSG = self.add(npyscreen.TitleText, name = "SELINUX")
 
