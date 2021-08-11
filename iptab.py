@@ -2,6 +2,8 @@
 import npyscreen
 import iptc
 
+# pointless comment
+
 class OptionsList(npyscreen.MultiLineAction):
     def __init__(self, *args, **keywords):
         super(OptionsList, self).__init__(*args, **keywords)
